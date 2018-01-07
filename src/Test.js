@@ -1,21 +1,24 @@
 import React from 'react';
+import {
+  View,
+  Text
+} from 'react-native';
 import { TabBar } from 'antd-mobile';
-import './MainTabBar.css';
 
-class MainTabBar extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			selectedTab: 'redTab',
-			hidden: false,
-			fullScreen: true
-		}
-	}
+export default class Test extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTab: 'redTab',
+      hidden: false,
+      fullScreen: false,
+    };
+  }
 
-	renderContent(pageText) {
+  renderContent(pageText) {
     return (
-      <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-        <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
+      <View style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
+        <View style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</View>
         <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
           onClick={(e) => {
             e.preventDefault();
@@ -36,13 +39,13 @@ class MainTabBar extends React.Component {
         >
           Click to switch fullscreen
         </a>
-      </div>
+      </View>
     );
   }
 
   render() {
     return (
-      <div style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', top: 0 } : { height: 400 }}>
+      <View style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', top: 0 } : { height: 400 }}>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
@@ -52,13 +55,13 @@ class MainTabBar extends React.Component {
           <TabBar.Item
             title="Life"
             key="Life"
-            icon={<div style={{
+            icon={<View style={{
               width: '22px',
               height: '22px',
               background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
             />
             }
-            selectedIcon={<div style={{
+            selectedIcon={<View style={{
               width: '22px',
               height: '22px',
               background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
@@ -77,14 +80,14 @@ class MainTabBar extends React.Component {
           </TabBar.Item>
           <TabBar.Item
             icon={
-              <div style={{
+              <View style={{
                 width: '22px',
                 height: '22px',
                 background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
               />
             }
             selectedIcon={
-              <div style={{
+              <View style={{
                 width: '22px',
                 height: '22px',
                 background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
@@ -105,14 +108,14 @@ class MainTabBar extends React.Component {
           </TabBar.Item>
           <TabBar.Item
             icon={
-              <div style={{
+              <View style={{
                 width: '22px',
                 height: '22px',
                 background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat' }}
               />
             }
             selectedIcon={
-              <div style={{
+              <View style={{
                 width: '22px',
                 height: '22px',
                 background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat' }}
@@ -145,7 +148,7 @@ class MainTabBar extends React.Component {
             {this.renderContent('My')}
           </TabBar.Item>
         </TabBar>
-      </div>
+      </View>
     );
   }
 }

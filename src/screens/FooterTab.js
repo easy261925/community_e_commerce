@@ -73,7 +73,7 @@ export default class Root extends Component {
             active={tab1}
             onPress={this.toggle1}
           >
-            <Icon name="apps" />
+            <Icon name="home" />
             <Text>首页</Text>
           </Button>
           <Button
@@ -81,7 +81,7 @@ export default class Root extends Component {
             active={tab2}
             onPress={this.toggle2}
           >
-            <Icon name="camera" />
+            <Icon name="apps" />
             <Text>分类</Text>
           </Button>
           <Button
@@ -89,7 +89,7 @@ export default class Root extends Component {
             active={tab3}
             onPress={this.toggle3}
           >
-            <Icon name="apps" />
+            <Icon name="cart" />
             <Text>购物车</Text>
           </Button>
           <Button
@@ -97,7 +97,7 @@ export default class Root extends Component {
             active={tab4}
             onPress={this.toggle4}
           >
-            <Icon name="apps" />
+            <Icon name="person" />
             <Text>我的</Text>
           </Button>
         </FooterTab>

@@ -9,6 +9,7 @@ import Home from './screens/Home';
 import Category from './screens/Category';
 import Cart from './screens/Cart';
 import Profile from './screens/Profile';
+import Signin from './screens/Signin';
 
 const Main = TabNavigator({
   Home: {
@@ -27,12 +28,39 @@ const Main = TabNavigator({
   tabBarComponent: FooterTab,
   backBehavior: 'none',
   tabBarPosition: 'bottom',
-  swipeEnabled: false
+  swipeEnabled: false,
+  mode: 'card',
+  headerMode: 'float',
+  navigationOptions: {
+    headerTitleAllowFontScaling: false,
+    headerTintColor: '#fff',
+    headerLeft: null,
+    headerStyle: {
+      // height: 20 + 44,         // iPhone x  44 + 44,
+      // paddingTop: 20,     // iPhone x  44
+      // borderBottomColor: 'red',
+      borderBottomWidth: 0,
+      backgroundColor: '#3f51b5'
+    }
+  }
 })
 
 const AppNavigator = StackNavigator({
   Main: {
-    screen: Main
+    screen: Main,
+  },
+  Signin: {
+    screen: Signin
+  }
+}, {
+  initialRouteName: 'Main',
+  navigationOptions: {
+    headerTitleAllowFontScaling: false,
+    headerTintColor: '#fff',
+    headerStyle: {
+      backgroundColor: '#3f51b5',
+      borderBottomWidth: 0
+    }
   }
 })
 

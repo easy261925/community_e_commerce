@@ -1,16 +1,27 @@
 import React from 'react';
 import {
   Content,
-  Text
+  Text,
+  Header,
+  Body,
+  Title,
+  View
 } from 'native-base';
+import { StyleSheet } from 'react-native';
+import HeaderDefault from '../components/HeaderDefault';
+import { PRIMARY_COLOR } from '../constants';
+
 
 export default class Home extends React.Component {
+  static navigationOptions = ({navigation}) => ({
+    title: '主页'
+  })
+
   render() {
     return (
       <Content>
-        <Text>
-          Home
-        </Text>
+        <View>
+        </View>
       </Content>
     )
   }

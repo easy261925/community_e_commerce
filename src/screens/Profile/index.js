@@ -9,18 +9,19 @@ import {
   H3
 } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { PRIMARY_COLOR } from '../constants';
+import { PRIMARY_COLOR } from '../../constants';
+import UserInfoHeader from './UserInfoHeader';
 
 const styles = StyleSheet.create({
   absoluteTop: {
     position: 'absolute',
-    top: 40,
-    height: 30,
+    top: 0,
+    height: 50,
     width: '100%',
     backgroundColor: PRIMARY_COLOR
   },
   signinBtn: {
-    paddingLeft: 20
+    padding: 20
   },
   contentHeader: {
     backgroundColor: '#fff',
@@ -36,7 +37,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonItemText: {
-    fontSize: 12
+    fontSize: 12,
+    color: '#333333'
   }
 })
 
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
 )
 export default class Profile extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: '会员中心',
+    header: null
     // headerRight: <HeaderRight isAuthorized={this.props.isAuthorized} />
   })
 
@@ -65,8 +67,12 @@ export default class Profile extends React.Component {
 
   renderSigninButton = () => {
     return (
-      <Button transparent style={styles.signinBtn}>
-        <H3>
+      <Button
+        transparent
+        style={styles.signinBtn}
+        onPress={this.handleGotoSignin}
+      >
+        <H3 style={{color: '#222222'}}>
           点击登录
         </H3>
       </Button>
@@ -81,28 +87,28 @@ export default class Profile extends React.Component {
     const signinBtn = this.renderSigninButton()
 
     return (
-      <Content padder>
+      <Content padder style={{backgroundColor: '#fff'}}>
+        {
+          !isAuthorized ? (
+            signinBtn
+          ) : <UserInfoHeader />
+        }
         <View style={styles.contentHeader}>
-          {
-            !isAuthorized ? (
-              signinBtn
-            ) : null
-          }
           <View style={styles.buttonGroup}>
-            <Button vertical transparent style={{flex: 1}}>
-              <Icon name="grid" />
+            <Button vertical transparent dark style={styles.buttonItem}>
+              <Icon name="ios-briefcase" style={{color: '#646464'}} />
               <Text style={styles.buttonItemText}>待发货</Text>
             </Button>
-            <Button vertical transparent style={styles.buttonItem}>
-              <Icon name="grid" />
-              <Text style={styles.buttonItemText}>配送中</Text>
+            <Button vertical transparent dark style={styles.buttonItem}>
+              <Icon name="md-archive" style={{color: '#646464'}} />
+              <Text style={styles.buttonItemText}>待收货</Text>
             </Button>
-            <Button vertical transparent style={styles.buttonItem}>
-              <Icon name="grid" />
+            <Button vertical transparent dark style={styles.buttonItem}>
+              <Icon name="ios-cash" style={{color: '#646464'}} />
               <Text style={styles.buttonItemText}>退款中</Text>
             </Button>
-            <Button vertical transparent style={styles.buttonItem}>
-              <Icon name="grid" />
+            <Button vertical transparent dark style={styles.buttonItem}>
+              <Icon name="ios-paper" style={{color: '#646464'}} />
               <Text style={styles.buttonItemText}>全部订单</Text>
             </Button>
           </View>

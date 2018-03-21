@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   content: {
-    padding: 10
+    backgroundColor: '#fff'
   }
 })
 
@@ -62,7 +62,7 @@ export default class Signin extends React.Component {
   signin = async () => {
     await this.props.signin(this.state.username, this.state.password)
 
-    if (this.props.errorMessage) {
+    if (this.props.errorMessage !== "") {
       Toast.show({
         text: this.props.errorMessage,
         position: 'top',
@@ -73,19 +73,48 @@ export default class Signin extends React.Component {
         navigation
       } = this.props
 
-      navigation.navigate('Main')
       Toast.show({
         text: '登录成功',
         position: 'top',
         type: 'success'
       })
+
+
+      if (navigation.state.params)  {
+        if (navigation.state.params.from) {
+          navigation.navigate(navigation.state.params.from)
+        } else {
+          navigation.navigate('Profile')
+        }
+      } else {
+        navigation.navigate('Profile')
+      }
+    }
+  }
+
+  handleSignup = () => {
+    const {
+      navigation
+    } = this.props
+
+    if (navigation.state.params)  {
+      if (navigation.state.params.from) {
+        navigation.navigate('Signup', { from: navigation.state.params.from})
+      } else {
+        navigation.navigate('Signup')
+      }
+    } else {
+      navigation.navigate('Signup')
     }
   }
 
   render() {
+    console.log(this.props)
+
     return (
       <Content
         style={styles.content}
+        padder
       >
         <Form>
           <Item floatingLabel>
@@ -101,6 +130,7 @@ export default class Signin extends React.Component {
               value={this.state.password}
               type="password"
               onChangeText={(text) => this.setState({password: text})}
+              secureTextEntry
             />
           </Item>
           <Button
@@ -109,6 +139,14 @@ export default class Signin extends React.Component {
             onPress={this.handleSubmit}
           >
             <Text>登录</Text>
+          </Button>
+          <Button
+            style={{marginTop: 10}}
+            block
+            info
+            onPress={this.handleSignup}
+          >
+            <Text>立即注册</Text>
           </Button>
         </Form>
       </Content>

@@ -8,7 +8,13 @@ import {
   USER_ID,
   TOKEN
 } from '../constants'
+import {
+  service,
+  serviceFailure,
+  serviceSuccess
+} from './index';
 import authService from '../services/authService';
+import userService from '../services/userService';
 import { AsyncStorage } from 'react-native';
 import storage from '../utils/storage';
 
@@ -58,8 +64,37 @@ function signin(username, password) {
   }
 }
 
+function signup(username, password, phone) {
+  return async dispatch => {
+    dispatch(service())
+    try {
+      const res = await userService.post(username, password, phone)
+
+      const userId = res.data.data.userId
+      const token = res.data.data.token
+
+      dispatch(serviceSuccess())
+      return dispatch(setCurrentUser({
+        userId,
+        token
+      }))
+    } catch (err) {
+      if (err.response === undefined) {
+        const errorMessage = '服务器错误，请稍后再试'
+        return dispatch(serviceFailure(errorMessage))
+      }
+
+      if (err.response.status === 400) {
+        const errorMessage = err.response.data.message
+        return dispatch(serviceFailure(errorMessage))
+      }
+    }
+  }
+}
+
 export {
   fetchToken,
   setCurrentUser,
-  signin
+  signin,
+  signup
 }

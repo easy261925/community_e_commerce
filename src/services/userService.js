@@ -1,7 +1,11 @@
 import {
   API
 } from '../constants'
-import rest from '../utils/';
+import axios from 'axios';
+import {
+  rest,
+  postData
+} from '../utils';
 
 const URL = `${API}/user`
 
@@ -11,6 +15,15 @@ const get = async (userId, token) => {
   )
 }
 
+const post = async (userName, passWord, phone) => {
+  return await axios.post(URL, postData({
+    userName,
+    passWord,
+    phone
+  }))
+}
+
 export default {
-  get
+  get,
+  post
 }

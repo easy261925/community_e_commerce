@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppLoading, Font } from 'expo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Provider } from 'react-redux';
 import {
   createStore,

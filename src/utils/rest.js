@@ -2,8 +2,8 @@
  * 封装axios 新增头部添加authorization的方法
  */
 import axios from 'axios';
-import { authorization } from './authorization';
 import {
+  authorization,
   postData,
   patchData
 } from './index';

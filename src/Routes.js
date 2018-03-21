@@ -10,6 +10,7 @@ import Category from './screens/Category';
 import Cart from './screens/Cart';
 import Profile from './screens/Profile';
 import Signin from './screens/Signin';
+import Signup from './screens/Signup';
 
 const Main = TabNavigator({
   Home: {
@@ -36,11 +37,12 @@ const Main = TabNavigator({
     headerTintColor: '#fff',
     headerLeft: null,
     headerStyle: {
-      // height: 20 + 44,         // iPhone x  44 + 44,
-      // paddingTop: 20,     // iPhone x  44
-      // borderBottomColor: 'red',
-      borderBottomWidth: 0,
-      backgroundColor: '#3f51b5'
+      height: 20 + 44,         // iPhone x  44 + 44,
+      paddingTop: 20,     // iPhone x  44
+      // borderBottom: null,
+      // borderBottomWidth: 0,
+      // borderBottomColorr: '#3f51b5',
+      backgroundColor: '#3f51b5',
     }
   }
 })
@@ -51,15 +53,19 @@ const AppNavigator = StackNavigator({
   },
   Signin: {
     screen: Signin
+  },
+  Signup: {
+    screen: Signup
   }
 }, {
-  initialRouteName: 'Main',
+  initialRouteName: 'Signin',
   navigationOptions: {
     headerTitleAllowFontScaling: false,
     headerTintColor: '#fff',
     headerStyle: {
+      height: 20 + 44,
+      paddingTop: 20,
       backgroundColor: '#3f51b5',
-      borderBottomWidth: 0
     }
   }
 })

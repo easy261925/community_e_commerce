@@ -1,13 +1,23 @@
 import {
   setCurrentUser,
-  signin
+  signin,
+  signup
 } from './authAction';
 import {
   loadUser
-} from './userAction'
+} from './userAction';
+import {
+  service,
+  serviceSuccess,
+  serviceFailure
+} from './serviceAction';
 
 export {
   setCurrentUser,
   signin,
-  loadUser
+  signup,
+  loadUser,
+  service,
+  serviceSuccess,
+  serviceFailure
 }

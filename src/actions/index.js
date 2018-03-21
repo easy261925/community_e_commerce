@@ -11,13 +11,21 @@ import {
   serviceSuccess,
   serviceFailure
 } from './serviceAction';
+import {
+  loadGoods
+} from './goodAction';
 
 export {
+  // auth
   setCurrentUser,
   signin,
   signup,
+  // user
   loadUser,
+  // service
   service,
   serviceSuccess,
-  serviceFailure
+  serviceFailure,
+  // good
+  loadGoods
 }

@@ -6,3 +6,5 @@ export const RECEIVE_USER = 'RECEIVE_USER';
 export const SERVICE = 'SERVICE';
 export const SERVICE_SUCCESS = 'SERVICE_SUCCESS';
 export const SERVICE_FAILURE = 'SERVICE_FAILURE';
+export const FETCH_GOODS = 'FETCH_GOODS';
+export const RECEIVE_GOODS = 'RECEIVE_GOODS';

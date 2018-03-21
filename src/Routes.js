@@ -9,8 +9,10 @@ import Home from './screens/Home';
 import Category from './screens/Category';
 import Cart from './screens/Cart';
 import Profile from './screens/Profile';
+import Search from './screens/Search';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
+import GoodSearch from './screens/GoodSearch/';
 
 const Main = TabNavigator({
   Home: {
@@ -56,9 +58,15 @@ const AppNavigator = StackNavigator({
   },
   Signup: {
     screen: Signup
+  },
+  Search: {
+    screen: Search
+  },
+  GoodSearch: {
+    screen: GoodSearch
   }
 }, {
-  initialRouteName: 'Signin',
+  initialRouteName: 'Main',
   navigationOptions: {
     headerTitleAllowFontScaling: false,
     headerTintColor: '#fff',

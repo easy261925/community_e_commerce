@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   Content,
+  Grid,
+  Col,
   Button,
   Text,
   Icon,
@@ -11,6 +13,9 @@ import {
 import { StyleSheet } from 'react-native';
 import { PRIMARY_COLOR } from '../../constants';
 import UserInfoHeader from './UserInfoHeader';
+import {
+  loadUser
+} from '../../actions';
 
 const styles = StyleSheet.create({
   absoluteTop: {
@@ -26,8 +31,14 @@ const styles = StyleSheet.create({
   contentHeader: {
     backgroundColor: '#fff',
     padding: 10,
-    marginTop: 10,
     display: 'flex',
+    // borderRadius: 3,
+    // borderWidth:1,
+    // borderColor:'#efeff4',
+    // shadowColor:'green',
+    // shadowOffset:{h:10,w:10},
+    // shadowRadius:3,
+    // shadowOpacity:0.8,
   },
   buttonGroup: {
     display: 'flex',
@@ -39,6 +50,23 @@ const styles = StyleSheet.create({
   buttonItemText: {
     fontSize: 12,
     color: '#333333'
+  },
+  firstListRow: {
+    marginTop: 40,
+    borderTopWidth: 1,
+    borderColor: '#efeff4',
+    marginLeft: 20,
+    marginRight: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  listRow: {
+    borderTopWidth: 1,
+    borderColor: '#efeff4',
+    marginLeft: 20,
+    marginRight: 20,
+    paddingTop: 20,
+    paddingBottom: 20
   }
 })
 
@@ -52,7 +80,13 @@ const styles = StyleSheet.create({
 
 @connect(
   state => ({
-    isAuthorized: state.auth.isAuthorized
+    isAuthorized: state.auth.isAuthorized,
+    userId: state.auth.user.userId,
+    token: state.auth.user.token,
+    user: state.userInfo.user
+  }),
+  dispatch => ({
+    loadUser: (userId, token) => dispatch(loadUser(userId, token))
   })
 )
 export default class Profile extends React.Component {
@@ -63,6 +97,19 @@ export default class Profile extends React.Component {
 
   handleGotoSignin = () => {
     this.props.navigation.navigate('Signin')
+  }
+
+  componentWillMount() {
+    const {
+      isAuthorized,
+      userId,
+      token,
+      loadUser
+    } = this.props
+
+    if (isAuthorized) {
+      loadUser(userId, token)
+    }
   }
 
   renderSigninButton = () => {
@@ -81,7 +128,8 @@ export default class Profile extends React.Component {
 
   render() {
     const {
-      isAuthorized
+      isAuthorized,
+      user
     } = this.props
 
     const signinBtn = this.renderSigninButton()
@@ -91,7 +139,7 @@ export default class Profile extends React.Component {
         {
           !isAuthorized ? (
             signinBtn
-          ) : <UserInfoHeader />
+          ) : <UserInfoHeader user={user}/>
         }
         <View style={styles.contentHeader}>
           <View style={styles.buttonGroup}>
@@ -113,6 +161,78 @@ export default class Profile extends React.Component {
             </Button>
           </View>
         </View>
+        <Grid style={styles.firstListRow}>
+          <Col>
+            <Text>地址管理</Text>
+          </Col>
+          <Col>
+            <Text style={{textAlign: 'right'}}>
+              <Icon name="grid" />
+            </Text>
+          </Col>
+        </Grid>
+        <Grid style={styles.listRow} onPress={() => alert(555)}>
+          <Col>
+            <Text>联系客服</Text>
+          </Col>
+          <Col>
+            <Text style={{textAlign: 'right'}}>
+              <Icon name="grid" />
+            </Text>
+          </Col>
+        </Grid>
+        <Grid style={styles.listRow}>
+          <Col>
+            <Text>推荐好友</Text>
+          </Col>
+          <Col>
+            <Text style={{textAlign: 'right'}}>
+              <Icon name="grid" />
+            </Text>
+          </Col>
+        </Grid>
+        <Grid style={styles.listRow}>
+          <Col>
+            <Text>意见反馈</Text>
+          </Col>
+          <Col>
+            <Text style={{textAlign: 'right'}}>
+              <Icon name="grid" />
+            </Text>
+          </Col>
+        </Grid>
+        <Grid style={styles.listRow}>
+          <Col>
+            <Text>我的优惠券</Text>
+          </Col>
+          <Col>
+            <Text style={{textAlign: 'right'}}>
+              <Icon name="grid" />
+            </Text>
+          </Col>
+        </Grid>
+        { isAuthorized ? (
+          <Grid style={styles.listRow}>
+            <Col>
+              <Text>线下门店</Text>
+            </Col>
+            <Col>
+              <Text style={{textAlign: 'right'}}>
+                <Icon name="grid" />
+              </Text>
+            </Col>
+          </Grid> ) : null
+        }
+        <Grid style={styles.listRow}>
+          <Col>
+            <Text>设置</Text>
+          </Col>
+          <Col>
+            <Text style={{textAlign: 'right'}}>
+              <Icon name="grid" />
+            </Text>
+          </Col>
+        </Grid>
       </Content>
     )
   }

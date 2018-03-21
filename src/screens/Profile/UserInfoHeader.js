@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import {
@@ -14,57 +15,42 @@ import {
   Grid,
   Col
 } from 'native-base';
-import {
-  loadUser
-} from '../../actions';
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: 30,
-    marginBottom: 30,
-    paddingLeft: 30,
-    paddingRight: 30,
+    marginTop: 60,
+    marginBottom: 50,
+    marginLeft: 20,
+    marginRight: 20,
     display: 'flex'
   }
 })
 
-@connect(
-  state => ({
-    userId: state.auth.user.userId,
-    token: state.auth.user.token,
-    user: state.userInfo.user
-  }),
-  dispatch => ({
-    loadUser: (userId, token) => dispatch(loadUser(userId, token))
-  })
-)
 export default class UserInfoHeader extends React.Component {
-  componentDidMount() {
-    this.props.loadUser(this.props.userId, this.props.token)
+  static propTypes = {
+    user: PropTypes.object
   }
 
   render() {
-    const {
-      user
-    } = this.props
+    const user = this.props.user ? this.props.user : {}
+    const nickName = user.nickName ? user.nickName : ""
+    const imageUri = user.avatar ? user.avatar : ""
 
     return (
       <View style={styles.wrapper}>
         <Grid>
-          <Col style={{display: 'flex', flexDirection: 'column', height: 80}}>
-            <Text style={{fontWeight: '500'}}>{user.nickName}</Text>
-            <Text>{user.avatar}</Text>
-            <Text style={{marginTop: 'auto', color: PRIMARY_COLOR}}>查看个人资料</Text>
-            {/* <Text style={{marginTop: 'auto'}}>点击</Text> */}
+          <Col style={{display: 'flex', flexDirection: 'column', height: 80, flex: 1}}>
+            <Text style={{fontWeight: '500', fontSize: 18}} numberOfLines={1}>{nickName}</Text>
+            <Text style={{marginTop: 'auto', color: PRIMARY_COLOR}}>查看并编辑个人资料</Text>
           </Col>
-          <Col style={{display: 'flex'}}>
+          <Col style={{display: 'flex', width: 90}}>
               {
-                user.avatar === "" ? (
+                imageUri === "" ? (
                   <Text style={{textAlign: 'right'}}>
                     <Icon name="person" style={{fontSize: 70}}/>
                   </Text>
                 ) : (
-                  <Thumbnail large source={{uri: user.avatar}} style={{marginLeft: 'auto'}}/>
+                  <Thumbnail large source={{uri: imageUri}} style={{marginLeft: 'auto'}}/>
                 )
               }
           </Col>

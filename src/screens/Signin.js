@@ -10,6 +10,7 @@ import {
   Label,
   Input,
   Button,
+  Spinner,
   Toast
 } from 'native-base';
 import {
@@ -109,7 +110,9 @@ export default class Signin extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    const {
+      isFetching
+    } = this.props
 
     return (
       <Content
@@ -122,6 +125,7 @@ export default class Signin extends React.Component {
             <Input
               value={this.state.username}
               onChangeText={(text) => this.setState({username: text})}
+              disabled={isFetching}
             />
           </Item>
           <Item floatingLabel last>
@@ -131,13 +135,20 @@ export default class Signin extends React.Component {
               type="password"
               onChangeText={(text) => this.setState({password: text})}
               secureTextEntry
+              disabled={isFetching}
             />
           </Item>
           <Button
             style={styles.submitButton}
             block
             onPress={this.handleSubmit}
+            disabled={isFetching}
           >
+            {
+              isFetching ? (
+                <Spinner />
+              ) : null
+            }
             <Text>登录</Text>
           </Button>
           <Button
@@ -145,6 +156,7 @@ export default class Signin extends React.Component {
             block
             info
             onPress={this.handleSignup}
+            disabled={isFetching}
           >
             <Text>立即注册</Text>
           </Button>

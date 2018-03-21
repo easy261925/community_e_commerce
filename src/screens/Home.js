@@ -10,11 +10,11 @@ import {
 import { StyleSheet } from 'react-native';
 import HeaderDefault from '../components/HeaderDefault';
 import { PRIMARY_COLOR } from '../constants';
-
+import HeaderSearchbar from '../components/HeaderSearchbar';
 
 export default class Home extends React.Component {
   static navigationOptions = ({navigation}) => ({
-    title: '主页'
+    header: <HeaderSearchbar navigation={navigation}/>
   })
 
   render() {

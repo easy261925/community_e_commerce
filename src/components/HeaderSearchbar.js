@@ -1,5 +1,7 @@
 import React from 'react';
-import TouchableHighlight from 'react-native';
+import {
+  StatusBar
+} from 'react-native';
 import {
   Header,
   Item,
@@ -25,27 +27,22 @@ export default class HeaderSearchbar extends React.Component {
     } = this.props
 
     return (
-      <View>
-        <Header searchBar rounded style={{paddingTop: 25, paddingBottom: 10, height: 70}}>
-          <Item onPress={this.handleGoToSearch}>
-            {
-              back ? (
-                <Icon name="ios-arrow-round-back" onPress={this.handleGoToHome} />
-              ) : (
-                <Icon name="ios-search" />
-              )
-            }
-            <Input placeholder="搜索试试" disabled/>
-          </Item>
-        </Header>
-      </View>
-      // <Header>
-        // <SearchBar
-        //   showLoading
-        //   platform="android"
-        //   placeholder='Search'
-        // />
-      // </Header>
+      <Header searchBar rounded style={{paddingTop: 25, paddingBottom: 10, height: 70, backgroundColor: '#fff'}}>
+        <StatusBar
+          animated
+          barStyle="dark-content"
+        />
+        <Item onPress={this.handleGoToSearch}>
+          {
+            back ? (
+              <Icon name="ios-arrow-round-back" onPress={this.handleGoToHome} />
+            ) : (
+              <Icon name="ios-search" />
+            )
+          }
+          <Input placeholder="搜索试试" disabled/>
+        </Item>
+      </Header>
     )
   }
 }

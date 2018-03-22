@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar
+} from 'react-native';
 
-const Profile = () => {
-  return (
-    <View>
-      <Text>Category</Text>
-    </View>
-  )
+export default class extends React.Component {
+  static navigationOptions = ({navigation}) => ({
+    header: <StatusBar animated barStyle="dark-content" />
+  })
+
+  render() {
+    return (
+      <View>
+      </View>
+    )
+  }
 }
-
-export default Profile;

@@ -13,6 +13,7 @@ import Search from './screens/Search';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
 import GoodSearch from './screens/GoodSearch/';
+import GoodDetail from './screens/GoodDetail/';
 
 const Main = TabNavigator({
   Home: {
@@ -36,15 +37,12 @@ const Main = TabNavigator({
   headerMode: 'float',
   navigationOptions: {
     headerTitleAllowFontScaling: false,
-    headerTintColor: '#fff',
+    headerTintColor: '#333',
     headerLeft: null,
     headerStyle: {
-      height: 20 + 44,         // iPhone x  44 + 44,
-      paddingTop: 20,     // iPhone x  44
-      // borderBottom: null,
-      // borderBottomWidth: 0,
-      // borderBottomColorr: '#3f51b5',
-      backgroundColor: '#3f51b5',
+      height: 20 + 44,
+      paddingTop: 20,
+      backgroundColor: '#fff',
     }
   }
 })
@@ -64,16 +62,19 @@ const AppNavigator = StackNavigator({
   },
   GoodSearch: {
     screen: GoodSearch
+  },
+  GoodDetail: {
+    screen: GoodDetail
   }
 }, {
   initialRouteName: 'Main',
   navigationOptions: {
     headerTitleAllowFontScaling: false,
-    headerTintColor: '#fff',
+    headerTintColor: '#333',
     headerStyle: {
       height: 20 + 44,
       paddingTop: 20,
-      backgroundColor: '#3f51b5',
+      backgroundColor: '#fff',
     }
   }
 })

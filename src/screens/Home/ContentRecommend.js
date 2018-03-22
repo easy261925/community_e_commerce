@@ -36,10 +36,8 @@ export default class extends React.Component {
   }
 
   handleItemClick = (good) => {
-    this.props.navigation.navigate('GoodSearch', {
-      good: {
-        goodId: good.goodId
-      }
+    this.props.navigation.navigate('GoodDetail', {
+      goodId: good.goodId
     })
   }
 

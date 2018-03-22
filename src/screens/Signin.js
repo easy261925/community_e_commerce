@@ -80,10 +80,15 @@ export default class Signin extends React.Component {
         type: 'success'
       })
 
+      const params = navigation.state.params
 
-      if (navigation.state.params)  {
-        if (navigation.state.params.from) {
-          navigation.navigate(navigation.state.params.from)
+      if (params)  {
+        if (params.from) {
+          if (params.params) {
+            navigation.navigate(params.from, params.params)
+          } else {
+            navigation.navigate(params.from)
+          }
         } else {
           navigation.navigate('Profile')
         }
@@ -100,7 +105,7 @@ export default class Signin extends React.Component {
 
     if (navigation.state.params)  {
       if (navigation.state.params.from) {
-        navigation.navigate('Signup', { from: navigation.state.params.from})
+          navigation.navigate('Signup', { from: navigation.state.params.from})
       } else {
         navigation.navigate('Signup')
       }

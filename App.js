@@ -23,8 +23,8 @@ const store = createStore(
   reducers,
   compose(
     applyMiddleware(
-      thunkMiddleware,
-      loggerMiddleware
+      thunkMiddleware
+      // loggerMiddleware
     )
   )
 )

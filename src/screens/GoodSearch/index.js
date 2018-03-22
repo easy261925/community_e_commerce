@@ -15,7 +15,8 @@ import {
 } from 'native-base';
 import {
   Card,
-  ListItem
+  ListItem,
+  Overlay
 } from 'react-native-elements';
 import HeaderSearchbar from '../../components/HeaderSearchbar';
 import {
@@ -70,6 +71,12 @@ export default class extends React.Component {
 
   componentWillMount() {
     this.props.searchGoods(this.props.navigation.state.params.good)
+  }
+
+  handleClick = (good) => {
+    this.props.navigation.navigate('GoodDetail', {
+      goodId: good.goodId
+    })
   }
 
   renderNotFound() {
@@ -141,10 +148,7 @@ export default class extends React.Component {
                     <Button
                       style={styles.buyBtn}
                       block
-                      // icon={{name: 'code'}}
-                      // backgroundColor='#03A9F4'
-                      // fontFamily='Lato'
-                      // buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                      onPress={() => this.handleClick(item)}
                     >
                       <Text>{item.price} ￥</Text>
                     </Button>

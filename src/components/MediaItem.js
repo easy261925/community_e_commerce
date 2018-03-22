@@ -16,10 +16,7 @@ import {
 
 const styles = StyleSheet.create({
   wrapper: {
-    // marginLeft: 5,
-    // marginRight: 5,
-    borderRadius: 3,
-    marginBottom: 20
+    marginBottom: 20,
   },
   mediaItem: {
   },
@@ -28,16 +25,22 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 4
   },
+  desc: {
+    color: '#324',
+    fontSize: 12,
+    paddingTop: 5
+  },
   title: {
     // paddingBottom: 10,
     // borderBottomWidth: 1,
     // borderBottomColor: '#efeff4',
     // marginBottom: 10,
+    paddingTop: 4,
     overflow: 'hidden',
     fontWeight: '500'
   },
   content: {
-    paddingTop: 5,
+    paddingTop: 4,
     color: '#666',
     fontSize: 14
   }
@@ -48,19 +51,24 @@ export default class extends React.Component {
     good: PropTypes.object
   }
 
+  handleClick = () => {
+    alert(this.props.good.goodId)
+  }
+
   render() {
     const {
       good
     } = this.props
 
     return (
-      <View style={styles.wrapper}>
+      <View style={styles.wrapper} >
         <Image
           style={styles.image}
           resizeMode="cover"
           source={{uri: good.image}}
         />
-        <Text style={styles.title} numberOfLine={1}>{good.goodName}</Text>
+        <Text style={styles.desc}>产地：{good.origin}</Text>
+        <Text style={styles.title} numberOfLines={2} selectable>{good.goodName}</Text>
         <Text style={styles.content}>￥ {good.originalPrice} 每件</Text>
       </View>
     )

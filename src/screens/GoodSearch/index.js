@@ -54,7 +54,7 @@ const styles = {
     goods: state.goods.searchs
   }),
   dispatch => ({
-    searchGoods: (goodName) => dispatch(search(1, 10, {goodName}))
+    searchGoods: (good) => dispatch(search(1, 10, good))
   })
 )
 export default class extends React.Component {
@@ -69,7 +69,7 @@ export default class extends React.Component {
   }
 
   componentWillMount() {
-    this.props.searchGoods(this.props.navigation.state.params.searchText)
+    this.props.searchGoods(this.props.navigation.state.params.good)
   }
 
   renderNotFound() {

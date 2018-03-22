@@ -41,7 +41,8 @@ export default class Home extends React.Component {
   render() {
     const {
       goods,
-      inService
+      inService,
+      navigation
     } = this.props
 
     return (
@@ -50,7 +51,10 @@ export default class Home extends React.Component {
         showsVerticalScrollIndicator={false}
       >
         <ContentHeader />
-        <ContentRecommend goods={goods} />
+        <ContentRecommend
+          goods={goods}
+          navigation={navigation}
+        />
       </Content>
     )
   }

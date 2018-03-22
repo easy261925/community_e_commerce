@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  StatusBar
+  StatusBar,
+  TouchableOpacity
 } from 'react-native';
 import {
   Header,
@@ -17,7 +18,8 @@ export default class HeaderSearchbar extends React.Component {
     this.props.navigation.navigate('Search')
   }
 
-  handleGoToHome = () => {
+  handleGoToHome = (e) => {
+    e.preventDefault()
     this.props.navigation.navigate('Home')
   }
 
@@ -35,7 +37,9 @@ export default class HeaderSearchbar extends React.Component {
         <Item onPress={this.handleGoToSearch}>
           {
             back ? (
-              <Icon name="ios-arrow-round-back" onPress={this.handleGoToHome} />
+              <TouchableOpacity activeOpacity={0.7} onPress={this.handleGoToHome} >
+                <Icon name="ios-arrow-round-back"/>
+              </TouchableOpacity>
             ) : (
               <Icon name="ios-search" />
             )

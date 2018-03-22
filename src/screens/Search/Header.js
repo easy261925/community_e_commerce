@@ -50,7 +50,11 @@ export default class extends React.Component {
   }
 
   handleSubmit = () => {
-    this.props.navigation.navigate('GoodSearch', { searchText: this.state.search })
+    this.props.navigation.navigate('GoodSearch', {
+      good: {
+        goodName: this.state.search
+      }
+    })
   }
 
   render() {

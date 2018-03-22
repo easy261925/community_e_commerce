@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Image,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 import {
   Content,
@@ -28,14 +30,36 @@ const styles = StyleSheet.create({
 })
 
 export default class extends React.Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired,
+    goods: PropTypes.array
+  }
+
+  handleItemClick = (good) => {
+    this.props.navigation.navigate('GoodSearch', {
+      good: {
+        goodId: good.goodId
+      }
+    })
+  }
+
   renderGoodList = () => {
     const goods = this.props.goods ? this.props.goods : []
     const dealGoods = []
     const goodList = []
 
     if (goods.length > 0) {
+      const length = goods.length
+
       for (let i = 0, len = goods.length; i < len; i+=2) {
         dealGoods.push(goods.slice(i, i + 2))
+      }
+
+      // 判断是否为单数，是单数在尾部加一个null
+      if (length % 2 === 1) {
+        const lastGoods = dealGoods.pop()
+        lastGoods.push(null)
+        dealGoods.push(lastGoods)
       }
 
       dealGoods.map((row, id) => {
@@ -52,11 +76,21 @@ export default class extends React.Component {
               marginLeft: 5
             }
           }
-          rows.push(
-            <Col key={index} style={style}>
-              <MediaItem good={item} />
-            </Col>
-          )
+
+          if (null !== item) {
+            rows.push(
+              <Col key={index} style={style}>
+                <TouchableOpacity activeOpacity={0.8} onPress={() => this.handleItemClick(item)}>
+                  <MediaItem good={item} />
+                </TouchableOpacity>
+              </Col>
+            )
+          } else {
+            rows.push(
+              <Col key={index} style={style}>
+              </Col>
+            )
+          }
         })
 
         goodList.push(

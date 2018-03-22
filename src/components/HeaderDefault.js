@@ -8,7 +8,19 @@ import {
   Right,
   Icon
 } from 'native-base';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  StatusBar
+} from 'react-native';
+
+const styles = StyleSheet.create({
+  wrapper: {
+    paddingTop: 25,
+    paddingBottom: 10,
+    height: 70,
+    backgroundColor: '#fff',
+  }
+})
 
 export default class HeaderDefault extends React.Component {
   static propTypes = {
@@ -23,10 +35,17 @@ export default class HeaderDefault extends React.Component {
     } = this.props
 
     return (
-      <Header>
+      <Header
+        style={styles.wrapper}
+        rounded
+      >
+        <StatusBar
+          animated
+          barStyle="dark-content"
+        />
         <Left />
         <Body>
-          <Title>
+          <Title style={{color: '#333'}}>
             {title}
           </Title>
         </Body>

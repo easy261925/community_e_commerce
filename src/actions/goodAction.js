@@ -2,7 +2,9 @@ import {
   FETCH_GOODS,
   RECEIVE_GOODS,
   SEARCH_GOODS,
-  RECEIVE_SEARCH
+  RECEIVE_SEARCH,
+  GET_GOOD,
+  RECEIVE_ONE_GOOD
 } from './types';
 import {
   service,
@@ -23,6 +25,12 @@ function searchGoods() {
   }
 }
 
+function getGood() {
+  return {
+    type: GET_GOOD
+  }
+}
+
 function receiveSearch(goods) {
   return {
     type: RECEIVE_SEARCH,
@@ -34,6 +42,13 @@ function receiveGoods(goods) {
   return {
     type: RECEIVE_GOODS,
     payload: goods
+  }
+}
+
+function receiveOneGood(good) {
+  return {
+    type: RECEIVE_ONE_GOOD,
+    payload: good
   }
 }
 
@@ -73,9 +88,26 @@ function search(page, rows, good) {
   }
 }
 
+function getOneGood(goodId) {
+  return async dispatch => {
+    dispatch(service())
+    dispatch(getGood())
+    try {
+      const res = await goodService.one(goodId)
+      dispatch(serviceSuccess())
+      const good = res.data.data
+      return dispatch(receiveOneGood(good))
+    } catch (err) {
+      if (err.response === undefined) {
+        const errorMessage = "服务器睡着了，请稍后再试"
+        return dispatch(serviceFailure(errorMessage))
+      }
+    }
+  }
+}
+
 export {
-  fetchGoods,
-  receiveGoods,
   search,
-  loadGoods
+  loadGoods,
+  getOneGood
 }

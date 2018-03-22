@@ -9,12 +9,20 @@ import {
 import {
   service,
   serviceSuccess,
-  serviceFailure
+  serviceFailure,
+  posting,
+  postSuccess,
+  postFailure,
 } from './serviceAction';
 import {
   loadGoods,
-  search
+  search,
+  getOneGood
 } from './goodAction'
+import {
+  getCartByGoodId,
+  addGoodToCart
+} from './cartAction';
 
 export {
   // auth
@@ -27,7 +35,14 @@ export {
   service,
   serviceSuccess,
   serviceFailure,
+  posting,
+  postSuccess,
+  postFailure,
   // good
   loadGoods,
-  search
+  search,
+  getOneGood,
+  // cart
+  getCartByGoodId,
+  addGoodToCart
 }

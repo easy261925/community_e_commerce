@@ -10,7 +10,7 @@ import {
   View,
   H3
 } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 import { PRIMARY_COLOR } from '../../constants';
 import UserInfoHeader from './UserInfoHeader';
 import {
@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY_COLOR
   },
   signinBtn: {
-    padding: 20
+    padding: 20,
+    marginTop: 60,
+    marginBottom: 20
   },
   contentHeader: {
     backgroundColor: '#fff',
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     paddingTop: 20,
+    paddingRight: 5,
     paddingBottom: 20,
   },
   listRow: {
@@ -66,6 +69,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     paddingTop: 20,
+    paddingRight: 5,
     paddingBottom: 20
   }
 })
@@ -91,8 +95,7 @@ const styles = StyleSheet.create({
 )
 export default class Profile extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    header: null
-    // headerRight: <HeaderRight isAuthorized={this.props.isAuthorized} />
+    header: <StatusBar animated barStyle="dark-content" />
   })
 
   handleGotoSignin = () => {
@@ -167,7 +170,7 @@ export default class Profile extends React.Component {
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="grid" />
+              <Icon name="ios-pin" />
             </Text>
           </Col>
         </Grid>
@@ -177,7 +180,7 @@ export default class Profile extends React.Component {
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="grid" />
+              <Icon name="md-contacts" />
             </Text>
           </Col>
         </Grid>
@@ -187,7 +190,7 @@ export default class Profile extends React.Component {
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="grid" />
+              <Icon name="ios-share-alt-outline" />
             </Text>
           </Col>
         </Grid>
@@ -197,39 +200,39 @@ export default class Profile extends React.Component {
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="grid" />
+              <Icon name="md-text" />
             </Text>
           </Col>
         </Grid>
         <Grid style={styles.listRow}>
           <Col>
-            <Text>我的优惠券</Text>
+            <Text>喜欢我们</Text>
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="grid" />
+              <Icon name="md-thumbs-up" />
             </Text>
           </Col>
         </Grid>
         { isAuthorized ? (
           <Grid style={styles.listRow}>
             <Col>
-              <Text>线下门店</Text>
+              <Text>设置</Text>
             </Col>
             <Col>
               <Text style={{textAlign: 'right'}}>
-                <Icon name="grid" />
+                <Icon name="ios-settings" />
               </Text>
             </Col>
           </Grid> ) : null
         }
         <Grid style={styles.listRow}>
           <Col>
-            <Text>设置</Text>
+            <Text>Github</Text>
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="grid" />
+              <Icon name="logo-github" />
             </Text>
           </Col>
         </Grid>

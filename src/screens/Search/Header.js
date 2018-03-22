@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  StyleSheet
+  StyleSheet,
+  StatusBar
 } from 'react-native';
 import {
   View,
@@ -57,6 +58,10 @@ export default class extends React.Component {
 
     return (
       <Header rounded style={styles.wrapper}>
+        <StatusBar
+          animated
+          barStyle="dark-content"
+        />
         <View>
           <Button transparent onPress={this.handleBack}>
             <Icon name="ios-close" style={styles.searchIcon} />

@@ -3,10 +3,12 @@ import auth from './auth';
 import userInfo from './user';
 import service from './service';
 import goods from './goods';
+import cart from './cart';
 
 export default combineReducers({
   auth,
   userInfo,
   service,
-  goods
+  goods,
+  cart
 })

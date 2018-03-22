@@ -11,7 +11,6 @@ export default class extends React.Component {
   })
 
   render() {
-    console.log('哈哈哈哈')
     return (
       <Content>
       </Content>

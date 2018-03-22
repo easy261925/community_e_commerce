@@ -1,6 +1,8 @@
 import {
   FETCH_GOODS,
-  RECEIVE_GOODS
+  RECEIVE_GOODS,
+  SEARCH_GOODS,
+  RECEIVE_SEARCH
 } from './types';
 import {
   service,
@@ -15,6 +17,19 @@ function fetchGoods() {
   }
 }
 
+function searchGoods() {
+  return {
+    type: SEARCH_GOODS
+  }
+}
+
+function receiveSearch(goods) {
+  return {
+    type: RECEIVE_SEARCH,
+    payload: goods
+  }
+}
+
 function receiveGoods(goods) {
   return {
     type: RECEIVE_GOODS,
@@ -22,16 +37,45 @@ function receiveGoods(goods) {
   }
 }
 
-function loadGoods(page, rows, good) {
+function loadGoods(page, rows, orderBy, good) {
   return async dispatch => {
     dispatch(service())
-    const res = await goodService.search(page, rows, good)
-    return dispatch(receiveGoods(res.data.data))
+    dispatch(fetchGoods())
+    try {
+      const res = await goodService.all(page, rows, orderBy, good)
+      dispatch(serviceSuccess())
+      const goods = res.data.data
+      return dispatch(receiveGoods(goods))
+    } catch (err) {
+      if (err.response === undefined) {
+        const errorMessage = "服务器睡着了，请稍后再试"
+        return dispatch(serviceFailure(errorMessage))
+      }
+    }
+  }
+}
+
+function search(page, rows, good) {
+  return async dispatch => {
+    dispatch(service())
+    dispatch(searchGoods())
+    try {
+      const res = await goodService.search(page, rows, good)
+      dispatch(serviceSuccess())
+      const goods = res.data.data
+      return dispatch(receiveSearch(goods))
+    } catch (err) {
+      if (err.response === undefined) {
+        const errorMessage = "服务器睡着了，请稍后再试"
+        return dispatch(serviceFailure(errorMessage))
+      }
+    }
   }
 }
 
 export {
   fetchGoods,
   receiveGoods,
+  search,
   loadGoods
 }

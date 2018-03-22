@@ -12,8 +12,9 @@ import {
   serviceFailure
 } from './serviceAction';
 import {
-  loadGoods
-} from './goodAction';
+  loadGoods,
+  search
+} from './goodAction'
 
 export {
   // auth
@@ -27,5 +28,6 @@ export {
   serviceSuccess,
   serviceFailure,
   // good
-  loadGoods
+  loadGoods,
+  search
 }

@@ -10,7 +10,11 @@ import {
   View,
   H3
 } from 'native-base';
-import { StyleSheet, StatusBar } from 'react-native';
+import {
+  StyleSheet,
+  StatusBar,
+  TouchableNativeFeedback
+} from 'react-native';
 import { PRIMARY_COLOR } from '../../constants';
 import UserInfoHeader from './UserInfoHeader';
 import {
@@ -102,6 +106,10 @@ export default class Profile extends React.Component {
     this.props.navigation.navigate('Signin')
   }
 
+  handleGoToAddress = () => {
+    this.props.navigation.navigate('Address')
+  }
+
   componentWillMount() {
     const {
       isAuthorized,
@@ -164,23 +172,25 @@ export default class Profile extends React.Component {
             </Button>
           </View>
         </View>
-        <Grid style={styles.firstListRow}>
-          <Col>
-            <Text>地址管理</Text>
-          </Col>
-          <Col>
-            <Text style={{textAlign: 'right'}}>
-              <Icon name="ios-pin" />
-            </Text>
-          </Col>
-        </Grid>
+        <TouchableNativeFeedback onPress={this.handleGoToAddress}>
+          <Grid style={styles.firstListRow}>
+            <Col>
+              <Text>地址管理</Text>
+            </Col>
+            <Col>
+              <Text style={{textAlign: 'right'}}>
+                <Icon name="ios-pin-outline" />
+              </Text>
+            </Col>
+          </Grid>
+        </TouchableNativeFeedback>
         <Grid style={styles.listRow} onPress={() => alert(555)}>
           <Col>
             <Text>联系客服</Text>
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="md-contacts" />
+              <Icon name="ios-chatbubbles-outline" />
             </Text>
           </Col>
         </Grid>
@@ -200,7 +210,7 @@ export default class Profile extends React.Component {
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="md-text" />
+              <Icon name="ios-text-outline" />
             </Text>
           </Col>
         </Grid>
@@ -210,7 +220,7 @@ export default class Profile extends React.Component {
           </Col>
           <Col>
             <Text style={{textAlign: 'right'}}>
-              <Icon name="md-thumbs-up" />
+              <Icon name="ios-star-outline" />
             </Text>
           </Col>
         </Grid>
@@ -221,7 +231,7 @@ export default class Profile extends React.Component {
             </Col>
             <Col>
               <Text style={{textAlign: 'right'}}>
-                <Icon name="ios-settings" />
+                <Icon name="ios-settings-outline" />
               </Text>
             </Col>
           </Grid> ) : null

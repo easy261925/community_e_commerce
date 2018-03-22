@@ -14,6 +14,7 @@ import Signin from './screens/Signin';
 import Signup from './screens/Signup';
 import GoodSearch from './screens/GoodSearch/';
 import GoodDetail from './screens/GoodDetail/';
+import Address from './screens/Address';
 
 const Main = TabNavigator({
   Home: {
@@ -65,6 +66,9 @@ const AppNavigator = StackNavigator({
   },
   GoodDetail: {
     screen: GoodDetail
+  },
+  Address: {
+    screen: Address
   }
 }, {
   initialRouteName: 'Main',

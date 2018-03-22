@@ -49,7 +49,12 @@ const all = async (page = 1, rows = 10, orderBy, good) => {
   }
 }
 
+const one = async (goodId) => {
+  return await axios.get(`${URL}/${goodId}`)
+}
+
 export default {
   search,
-  all
+  all,
+  one
 }

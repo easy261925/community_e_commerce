@@ -20,12 +20,14 @@ import {
 } from '../actions';
 import {
   RE_USERNAME,
-  RE_PHONE
+  RE_PHONE,
+  RED_COLOR
 } from '../constants'
 
 const styles = StyleSheet.create({
   submitButton: {
-    marginTop: 30
+    marginTop: 30,
+    backgroundColor: RED_COLOR
   },
   content: {
     backgroundColor: '#fff'

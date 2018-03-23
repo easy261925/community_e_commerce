@@ -22,6 +22,7 @@ import HeaderSearchbar from '../../components/HeaderSearchbar';
 import {
   search
 } from '../../actions';
+import { RED_COLOR } from '../../constants';
 
 const styles = {
   desc: {
@@ -40,7 +41,8 @@ const styles = {
     textDecorationLine: 'line-through'
   },
   buyBtn: {
-    marginTop: 10
+    marginTop: 10,
+    backgroundColor: RED_COLOR
   },
   notFound: {
     display: 'flex',
@@ -150,7 +152,7 @@ export default class extends React.Component {
                       block
                       onPress={() => this.handleClick(item)}
                     >
-                      <Text>{item.price} ￥</Text>
+                      <Text>￥ {item.price}</Text>
                     </Button>
                   </View>
                 </Card>

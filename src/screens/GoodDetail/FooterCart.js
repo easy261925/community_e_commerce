@@ -16,6 +16,7 @@ import {
   getCartByGoodId,
   addGoodToCart
 } from '../../actions';
+import { RED_COLOR } from '../../constants';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -103,6 +104,10 @@ export default class extends React.Component {
     }
   }
 
+  _handleGoToCart = () => {
+    this.props.navigation.navigate('Cart')
+  }
+
   render() {
     const {
       isAuthorized,
@@ -123,7 +128,11 @@ export default class extends React.Component {
                 left: 0
               }}
             >
-              <Button rounded style={{backgroundColor: '#f56c6c'}}>
+              <Button
+                rounded
+                style={{backgroundColor: '#f56c6c'}}
+                onPress={this._handleGoToCart}
+              >
                 <Icon name="cart" />
               </Button>
             </View>
@@ -145,7 +154,7 @@ export default class extends React.Component {
           <View style={styles.btnGroup}>
             <Button
               rounded
-              info
+              warning
               outline
               onPress={() => this.handleUpdateCart(-1)}
               disabled={this.props.posting}
@@ -155,7 +164,7 @@ export default class extends React.Component {
             <Button
               rounded
               onPress={() => this.handleUpdateCart(1)}
-              style={{marginLeft: 15}}
+              style={{marginLeft: 15, backgroundColor: RED_COLOR}}
               disabled={this.props.posting}
             >
               <Icon name="ios-add" />

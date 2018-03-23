@@ -17,10 +17,12 @@ import {
   signin
 } from '../actions';
 import HeaderDefault from '../components/HeaderDefault';
+import { RED_COLOR } from '../constants';
 
 const styles = StyleSheet.create({
   submitButton: {
-    marginTop: 30
+    marginTop: 30,
+    backgroundColor: RED_COLOR
   },
   content: {
     backgroundColor: '#fff'

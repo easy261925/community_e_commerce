@@ -8,6 +8,7 @@ import {
   Text,
   Icon,
   View,
+  Toast,
   H3
 } from 'native-base';
 import {
@@ -15,7 +16,7 @@ import {
   StatusBar,
   TouchableNativeFeedback
 } from 'react-native';
-import { PRIMARY_COLOR } from '../../constants';
+import { PRIMARY_COLOR, SERVICE_CONTENT, SUGGEST_CONTENT, GITHUB_CONTENT } from '../../constants';
 import UserInfoHeader from './UserInfoHeader';
 import {
   loadUser
@@ -107,7 +108,12 @@ export default class Profile extends React.Component {
   }
 
   handleGoToAddress = () => {
-    this.props.navigation.navigate('Address')
+    if (this._checkAuthorization()) {
+      this.props.navigation.navigate('Address')
+    } else {
+      this._shadowToast('请先登录')
+      this.handleGotoSignin()
+    }
   }
 
   componentWillMount() {
@@ -121,6 +127,34 @@ export default class Profile extends React.Component {
     if (isAuthorized) {
       loadUser(userId, token)
     }
+  }
+
+  _checkAuthorization = () => {
+    if (this.props.isAuthorized) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  _shadowToast = (text, type = "warning") => {
+    Toast.show({
+      text,
+      type,
+      position: 'top'
+    })
+  }
+
+  _concatWithService = () => {
+    alert(SERVICE_CONTENT)
+  }
+
+  _handleSuggest = () => {
+    alert(SUGGEST_CONTENT)
+  }
+
+  _handleGithubLink = () => {
+    alert(GITHUB_CONTENT)
   }
 
   renderSigninButton = () => {
@@ -184,16 +218,18 @@ export default class Profile extends React.Component {
             </Col>
           </Grid>
         </TouchableNativeFeedback>
-        <Grid style={styles.listRow} onPress={() => alert(555)}>
-          <Col>
-            <Text>联系客服</Text>
-          </Col>
-          <Col>
-            <Text style={{textAlign: 'right'}}>
-              <Icon name="ios-chatbubbles-outline" />
-            </Text>
-          </Col>
-        </Grid>
+        <TouchableNativeFeedback onPress={this._concatWithService}>
+          <Grid style={styles.listRow}>
+            <Col>
+              <Text>联系客服</Text>
+            </Col>
+            <Col>
+              <Text style={{textAlign: 'right'}}>
+                <Icon name="ios-chatbubbles-outline" />
+              </Text>
+            </Col>
+          </Grid>
+        </TouchableNativeFeedback>
         <Grid style={styles.listRow}>
           <Col>
             <Text>推荐好友</Text>
@@ -204,16 +240,18 @@ export default class Profile extends React.Component {
             </Text>
           </Col>
         </Grid>
-        <Grid style={styles.listRow}>
-          <Col>
-            <Text>意见反馈</Text>
-          </Col>
-          <Col>
-            <Text style={{textAlign: 'right'}}>
-              <Icon name="ios-text-outline" />
-            </Text>
-          </Col>
-        </Grid>
+        <TouchableNativeFeedback onPress={this._handleSuggest}>
+          <Grid style={styles.listRow}>
+            <Col>
+              <Text>意见反馈</Text>
+            </Col>
+            <Col>
+              <Text style={{textAlign: 'right'}}>
+                <Icon name="ios-text-outline" />
+              </Text>
+            </Col>
+          </Grid>
+        </TouchableNativeFeedback>
         <Grid style={styles.listRow}>
           <Col>
             <Text>喜欢我们</Text>
@@ -236,16 +274,18 @@ export default class Profile extends React.Component {
             </Col>
           </Grid> ) : null
         }
-        <Grid style={styles.listRow}>
-          <Col>
-            <Text>Github</Text>
-          </Col>
-          <Col>
-            <Text style={{textAlign: 'right'}}>
-              <Icon name="logo-github" />
-            </Text>
-          </Col>
-        </Grid>
+        <TouchableNativeFeedback onPress={this._handleGithubLink}>
+          <Grid style={styles.listRow}>
+            <Col>
+              <Text>Github</Text>
+            </Col>
+            <Col>
+              <Text style={{textAlign: 'right'}}>
+                <Icon name="logo-github" />
+              </Text>
+            </Col>
+          </Grid>
+        </TouchableNativeFeedback>
       </Content>
     )
   }

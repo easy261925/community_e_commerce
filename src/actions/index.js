@@ -23,6 +23,11 @@ import {
   getCartByGoodId,
   addGoodToCart
 } from './cartAction';
+import {
+  loadAllAddesses,
+  getAddress,
+  createAddress
+} from './addressAction'
 
 export {
   // auth
@@ -44,5 +49,9 @@ export {
   getOneGood,
   // cart
   getCartByGoodId,
-  addGoodToCart
+  addGoodToCart,
+  // address
+  loadAllAddesses,
+  getAddress,
+  createAddress
 }

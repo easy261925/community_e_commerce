@@ -42,7 +42,7 @@ export default class AddressPicker extends React.Component {
   _renderRow = (rowData, rowId) => {
     const lists = rowData.citys.map((content, index) => {
       return (
-        <ListItem key={index} onPress={() => this._handleSelect(content.citysName)}>
+        <ListItem key={index} onPress={() => this._handleSelect(rowData.provinceName + content.citysName)}>
           <Text>{content.citysName}</Text>
         </ListItem>
       )

@@ -72,7 +72,7 @@ function postAddressFailure(message) {
  */
 function loadAllAddesses(userId, token) {
   return async dispatch => {
-    dispach(fetchAddresses())
+    dispatch(fetchAddresses())
     try {
       const res = await addressService.all(userId, token)
       const addresses = res.data.data
@@ -108,7 +108,7 @@ function loadAllAddesses(userId, token) {
  */
 function getAddress(userId, token, addressId) {
   return async dispatch => {
-    dispach(fetchOneAddress())
+    dispatch(fetchOneAddress())
     try {
       const res = await addressService.one(userId, token, addressId)
       const address = res.data.data

@@ -5,6 +5,7 @@ import {
   Body,
   Title,
   Left,
+  Button,
   Right,
   Icon
 } from 'native-base';
@@ -12,6 +13,7 @@ import {
   StyleSheet,
   StatusBar
 } from 'react-native';
+import { RED_COLOR } from '../constants';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -28,10 +30,15 @@ export default class HeaderDefault extends React.Component {
     icon: PropTypes.string
   }
 
+  backToHome = () => {
+    this.props.navigation.navigate('Main')
+  }
+
   render() {
     const {
       title,
-      icon
+      icon,
+      backToHome
     } = this.props
 
     return (
@@ -43,7 +50,15 @@ export default class HeaderDefault extends React.Component {
           animated
           barStyle="dark-content"
         />
-        <Left />
+        {
+          backToHome ? (
+            <Left>
+              <Button onPress={this.backToHome} style={{backgroundColor: RED_COLOR}}>
+                <Icon name='arrow-back' color="#333" />
+              </Button>
+            </Left>
+          ) :  <Left />
+        }
         <Body>
           <Title style={{color: '#333'}}>
             {title}

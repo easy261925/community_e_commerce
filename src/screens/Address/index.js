@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
 )
 export default class extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: '地址管理',
-    backBehavior: 'initialRoute'
+    header: <HeaderDefault title="地址管理" backToHome navigation={navigation} />
   })
 
   handleCreateAddress = () => {

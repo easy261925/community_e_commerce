@@ -75,7 +75,7 @@ const AppNavigator = StackNavigator({
     screen: PostAddress
   }
 }, {
-  initialRouteName: 'Signin',
+  initialRouteName: 'Main',
   navigationOptions: {
     headerTitleAllowFontScaling: false,
     headerTintColor: '#333',

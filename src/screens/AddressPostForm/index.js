@@ -16,10 +16,12 @@ import {
   Item,
   Label,
   Input,
+  Toast,
+  Spinner,
   CheckBox
 } from 'native-base';
 import {
-  RED_COLOR
+  RED_COLOR, RE_PHONE
 } from '../../constants';
 import AddressPicker from '../../components/AddressPicker';
 import {
@@ -45,7 +47,9 @@ const styles = StyleSheet.create({
   state => ({
     userId: state.auth.user.userId,
     token: state.auth.user.token,
-    isAuthorized: state.auth.isAuthorized
+    isAuthorized: state.auth.isAuthorized,
+    isPostingAddress: state.address.isPostingAddress,
+    postErrorMessage: state.address.postErrorMessage
   }),
   dispatch => ({
     createAddress: (userId, token, address) => dispatch(createAddress(userId, token, address))
@@ -146,7 +150,7 @@ export default class AddressPostForm extends React.Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const {
       userId,
       token,
@@ -160,9 +164,65 @@ export default class AddressPostForm extends React.Component {
         form: form
       }})
     } else {
-      form.phone = parseInt(form.phone)
-      createAddress(userId, token, form)
+      if(!this.validate()) {
+        return ;
+      }
+
+      const phone = parseInt(form.phone, 10)
+      await createAddress(userId, token, {
+        ...form,
+        phone
+      })
+
+      if (this.props.postErrorMessage !== "") {
+        this.showToast(this.props.postErrorMessage, 'danger')
+      } else {
+        this.showToast('成功添加新收货地址', 'success')
+
+        navigation.navigate('Address')
+      }
     }
+  }
+
+  validate = () => {
+    const {
+      form
+    } = this.state
+
+    if (form.consignee === "") {
+      this.showToast('请输入正确的收货人姓名')
+      return false
+    }
+
+    if (!RE_PHONE.test(form.phone)) {
+      this.showToast('请输入正确的手机号码')
+      return false
+    }
+
+    if (form.city === "") {
+      this.showToast('请选择城市')
+      return false
+    }
+
+    if (form.address === "") {
+      this.showToast('请输入正确的详细地址')
+      return false
+    }
+
+    if (form.streetNumber === "") {
+      this.showToast('请输入正确的门牌号')
+      return false
+    }
+
+    return true
+  }
+
+  showToast = (text, type = 'warning') => {
+    Toast.show({
+      text,
+      position: 'absolute',
+      type
+    })
   }
 
   render() {
@@ -183,7 +243,6 @@ export default class AddressPostForm extends React.Component {
               <Input
                 keyboardType="numeric"
                 maxLength={12}
-                dataDetectorTypes="phoneNumber"
                 value={this.state.form.phone}
                 onChangeText={text => this.handleValueChange({phone: text})}
               />
@@ -205,7 +264,7 @@ export default class AddressPostForm extends React.Component {
             </Item>
             <Item onPress={this.handleIsDefaultChange}>
               <Label>是否为默认地址</Label>
-              <CheckBox checked={this.state.form.isDefault} disabled />
+              <CheckBox checked={this.state.form.isDefault} disabled color={RED_COLOR} />
               <Input disabled />
             </Item>
           </Form>
@@ -217,6 +276,11 @@ export default class AddressPostForm extends React.Component {
         </Content>
         <TouchableNativeFeedback onPress={this.handleSubmit}>
           <Footer style={styles.footer}>
+            {
+              this.props.isPostingAddress ? (
+                <Spinner color="#fff" />
+              ) : null
+            }
             <Text style={styles.footerContent}>确认添加</Text>
           </Footer>
         </TouchableNativeFeedback>

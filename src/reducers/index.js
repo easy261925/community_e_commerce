@@ -11,5 +11,6 @@ export default combineReducers({
   userInfo,
   service,
   goods,
+  address,
   cart
 })

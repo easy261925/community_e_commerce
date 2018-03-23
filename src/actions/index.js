@@ -21,7 +21,8 @@ import {
 } from './goodAction'
 import {
   getCartByGoodId,
-  addGoodToCart
+  addGoodToCart,
+  getCart
 } from './cartAction';
 import {
   loadAllAddesses,
@@ -50,6 +51,7 @@ export {
   // cart
   getCartByGoodId,
   addGoodToCart,
+  getCart,
   // address
   loadAllAddesses,
   getAddress,

@@ -1,6 +1,9 @@
 import {
   GET_CART_GOOD_DETAIL,
   RECEIVE_ONE_CART,
+  FETCH_CART_DETAIL_FAILURE,
+  FETCH_CART,
+  RECEIVE_CART,
   FETCH_CART_FAILURE
 } from './types'
 import {
@@ -27,10 +30,50 @@ function receiveOneCart(cartDetail) {
   }
 }
 
-function fetchCartFailure(message) {
+function fetchCartDetailFailure(message) {
   return {
+    type: FETCH_CART_DETAIL_FAILURE,
+    payload: message
+  }
+}
+
+function fetchCart() {
+  return {
+    type: FETCH_CART
+  }
+}
+
+function receiveCart(cart) {
+  return {
+    type: RECEIVE_CART,
+    payload: cart
+  }
+}
+
+function fetchCartFailure(message) {
+  return{
     type: FETCH_CART_FAILURE,
     payload: message
+  }
+}
+
+function getCart(userId) {
+  return async dispatch => {
+    dispatch(fetchCart())
+    try {
+      const res = await cartService.getCart(userId)
+      const cart = res.data.data
+      dispatch(receiveCart(cart))
+    } catch (err) {
+      if (err.response === undefined) {
+        const errorMessage = "服务器睡着了，请稍后再试"
+        return dispatch(fetchCartFailure(errorMessage))
+      }
+      if (err.response.status === 404) {
+        const errorMessage = err.response.data.message
+        return dispatch(fetchCartFailure(errorMessage))
+      }
+    }
   }
 }
 
@@ -51,11 +94,11 @@ function getCartByGoodId(userId, token, goodId) {
     } catch (err) {
       if (err.response === undefined) {
         const errorMessage = "服务器睡着了，请稍后再试"
-        return dispatch(fetchCartFailure(errorMessage))
+        return dispatch(fetchCartDetailFailure(errorMessage))
       }
       if (err.response.status === 404) {
         const errorMessage = err.response.data.message
-        return dispatch(fetchCartFailure(errorMessage))
+        return dispatch(fetchCartDetailFailure(errorMessage))
       }
     }
   }
@@ -90,5 +133,6 @@ function addGoodToCart(userId, token, goodId, count) {
 
 export {
   getCartByGoodId,
-  addGoodToCart
+  addGoodToCart,
+  getCart
 }

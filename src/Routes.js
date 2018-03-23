@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'native-base';
+import { Container, Icon } from 'native-base';
 import {
   StackNavigator,
   TabNavigator
@@ -16,27 +16,85 @@ import GoodSearch from './screens/GoodSearch/';
 import GoodDetail from './screens/GoodDetail/';
 import Address from './screens/Address';
 import PostAddress from './screens/AddressPostForm';
+import TabBarItem from './components/TabBarItem';
+import { RED_COLOR, RED_COLOR_ACTIVE } from './constants';
 
 const Main = TabNavigator({
   Home: {
-    screen: Home
+    screen: Home,
+    navigationOptions: ({navigation}) => ({
+      tabBarLabel: '首页',
+      tabBarIcon: ({focused, tintColor}) => (
+        <TabBarItem
+          focused={focused}
+          tintColor={tintColor}
+          iconName="home"
+        />
+      )
+    })
   },
   Category: {
-    screen: Category
+    screen: Category,
+    navigationOptions: ({navigation}) => ({
+      tabBarLabel: '分类',
+      tabBarIcon: ({focused, tintColor}) => (
+        <TabBarItem
+          focused={focused}
+          tintColor={tintColor}
+          iconName="apps"
+        />
+      )
+    })
   },
   Cart: {
-    screen: Cart
+    screen: Cart,
+    navigationOptions: ({navigation}) => ({
+      tabBarLabel: '购物车',
+      tabBarIcon: ({focused, tintColor}) => (
+        <TabBarItem
+          focused={focused}
+          tintColor={tintColor}
+          iconName="cart"
+        />
+      )
+    })
   },
   Profile: {
-    screen: Profile
+    screen: Profile,
+    navigationOptions: ({navigation}) => ({
+      tabBarLabel: '我的',
+      tabBarIcon: ({focused, tintColor}) => (
+        <TabBarItem
+          focused={focused}
+          tintColor={tintColor}
+          iconName="person"
+        />
+      )
+    })
   }
 }, {
-  tabBarComponent: FooterTab,
+  // tabBarComponent: null,
   backBehavior: 'none',
   tabBarPosition: 'bottom',
   swipeEnabled: false,
   mode: 'card',
   headerMode: 'float',
+  tabBarOptions: {
+    showIcon: true,
+    activeTintColor: RED_COLOR_ACTIVE,
+    inactiveTintColor: '#454545',
+    style: {
+      backgroundColor: '#fff',
+      height: 50
+    },
+    labelStyle: {
+      marginTop: -4,
+      fontSize: 14
+    },
+    indicatorStyle: {
+      height: 0
+    }
+  },
   navigationOptions: {
     headerTitleAllowFontScaling: false,
     headerTintColor: '#333',

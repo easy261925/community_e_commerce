@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppLoading, Font } from 'expo';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, Badge } from 'native-base';
+import { RED_COLOR } from '../constants';
 
 export default class Root extends Component {
   constructor(props) {

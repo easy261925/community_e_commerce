@@ -15,6 +15,9 @@ import {
   Grid,
   Col
 } from 'native-base';
+import {
+  RED_COLOR
+} from '../../constants';
 import Loading from '../../components/Loading';
 import FooterCart from './FooterCart';
 import { getOneGood } from '../../actions';
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
-    color: '#f56c6c'
+    color: RED_COLOR
   },
   desc: {
     backgroundColor: '#fff',

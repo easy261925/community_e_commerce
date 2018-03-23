@@ -15,6 +15,7 @@ import Signup from './screens/Signup';
 import GoodSearch from './screens/GoodSearch/';
 import GoodDetail from './screens/GoodDetail/';
 import Address from './screens/Address';
+import PostAddress from './screens/AddressPostForm';
 
 const Main = TabNavigator({
   Home: {
@@ -69,9 +70,12 @@ const AppNavigator = StackNavigator({
   },
   Address: {
     screen: Address
+  },
+  PostAddress: {
+    screen: PostAddress
   }
 }, {
-  initialRouteName: 'Main',
+  initialRouteName: 'Signin',
   navigationOptions: {
     headerTitleAllowFontScaling: false,
     headerTintColor: '#333',

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   rest
 } from '../utils/';
@@ -23,7 +24,14 @@ const post = async (userId, token, goodId, count) => {
   )
 }
 
+const getCart = async (userId) => {
+  return await axios.get(
+    `${URL}/${userId}/cart`
+  )
+}
+
 export default {
   getDetailByGoodId,
-  post
+  post,
+  getCart
 }

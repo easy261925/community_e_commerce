@@ -39,7 +39,7 @@ npm start
 
 ### 目录结构介绍
 ```  
-***├── src                                  // 源码目录 ***  
+***├── src                                 // 源码目录 ***  
 ***│   ├── components                      // 一些可复用的组件 ***  
 ***│   ├── screens                         // 页面（容器） ***
 ***│   ├── constants                       // 项目全局配置 ***  
@@ -48,6 +48,6 @@ npm start
 ***│   ├── actions                         // actions ***  
 ***│   ├── utils                           // 封装的一些常用工具 ***  
 ***│   ├── Routes.js                       // react-navigation路由配置 ***
-***├── App.js                               // 程序入口文件，加载各种公共组件 ***  
+***├── App.js                              // 程序入口文件，加载各种公共组件 ***  
 ***├── .babelrc                            // babel配置文件 ***  
 ```
